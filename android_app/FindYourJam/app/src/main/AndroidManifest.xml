@@ -30,6 +30,12 @@
             android:name=".session.RegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoToolbar" />
+        <activity
+            android:name=".eventlistattend.DisplayEventListAttendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".eventlistscreated.DisplayEventListActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

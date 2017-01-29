@@ -1,11 +1,8 @@
 package com.example.tarunkalikivaya.findyourjam;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,6 +12,18 @@ import android.support.v7.widget.Toolbar;
 import android.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.example.tarunkalikivaya.findyourjam.eventlistattend.DisplayEventListAttendActivity;
+import com.example.tarunkalikivaya.findyourjam.eventlistscreated.DisplayEventListActivity;
+import com.example.tarunkalikivaya.findyourjam.session.LoginActivity;
+
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 
 public class NavigationActivity extends AppCompatActivity
@@ -99,14 +108,78 @@ public class NavigationActivity extends AppCompatActivity
     }
     public void EventsAttending(){
 
+        Intent intent = new Intent(NavigationActivity.this,DisplayEventListAttendActivity.class);
+        startActivity(intent);
+    }
+    public void EventsOwned(){
+        Intent intent = new Intent(NavigationActivity.this,DisplayEventListActivity.class);
+        startActivity(intent);
     }
     public void CreateEvent(){
 
     }
     public void Logout(){
-
+        new Logout().execute(Constants.getToken(this));
     }
-    public void EventsOwned(){
 
+    /**
+     * Logout
+     */
+    private class Logout extends AsyncTask<String, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(String ... str){
+            String token = str[0];
+            String status = "";
+            String urlEndPoint = Constants.WEB_URL + "/api/v1/auth/logout" ;
+
+            //Run the api call
+            HttpURLConnection client = null;
+            try {
+                URL url = new URL(urlEndPoint);
+                client =(HttpURLConnection) url.openConnection();
+                client.setRequestMethod("GET");
+                client.setConnectTimeout(10000);
+                client.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                client.setRequestProperty("Authorization", " Token " + token);
+                client.connect();
+                int t  =client.getResponseCode();
+                if(t!= 200){
+                    return false;
+                }
+                BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                String text = br.readLine();
+                JSONObject response= new JSONObject(text);
+
+                status = response.getString("status");
+            }catch (Exception e){
+                e.printStackTrace();
+                if(client!=null){
+                    client.disconnect();
+                }
+                return false;
+            }finally {
+                if (client != null) {
+                    client.disconnect();
+                }
+            }
+            if(!status.equals("success")){
+                return false;
+            }
+            return true;
+        }
+        @Override
+        protected void onPostExecute(Boolean bool){
+            if(bool){
+                Intent intent = new Intent(NavigationActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
+
+                //Toast.makeText(getApplicationContext(), "Test 1", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getApplicationContext(), "Logout Unsuccessful", Toast.LENGTH_SHORT).show();
+                //displayErrorMessage();
+                //stopLoading();
+            }
+        }
     }
 }

@@ -25,6 +25,7 @@ import com.example.tarunkalikivaya.findyourjam.MainActivity;
 import com.example.tarunkalikivaya.findyourjam.NavigationActivity;
 import com.example.tarunkalikivaya.findyourjam.R;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
