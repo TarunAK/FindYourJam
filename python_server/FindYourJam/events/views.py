@@ -51,7 +51,8 @@ def get_event(request):
     """
     Get Events in an area
     """
-    request_data = json.load(request.body)
+    us = request.user
+    request_data = json.loads(request.body)
     if not (request_data.get('event_id')):
         response_data = {
             'status': 'error'
@@ -59,6 +60,10 @@ def get_event(request):
         return Response(data=response_data, status=status.HTTP_400_BAD_REQUEST)
     event_id = uuid.UUID(request_data.get('event_id')).hex
     event = Event.objects.get(id=event_id)
+    same_user = 'false'
+    if (event.user_creator.username == us.username):
+        same_user = 'true'
+
     response_data = {
         'status': 'success',
         'title': event.title,
@@ -66,7 +71,8 @@ def get_event(request):
         'date': event.date,
         'location': event.location,
         'lat': event.lat,
-        'long': event.long
+        'long': event.long,
+        'same': same_user
     }
     return Response(data=response_data, status=status.HTTP_200_OK)
 
@@ -109,7 +115,7 @@ def get_multiple_events(request):
     return Response(data=response_data, status=status.HTTP_200_OK)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 @authentication_classes((TokenAuthentication,))
 @permission_classes((IsAuthenticated,))
 def attend_event(request):
@@ -117,7 +123,7 @@ def attend_event(request):
     attend an event
     """
     user = request.user
-    request_data = json.load(request.body)
+    request_data = json.loads(request.body)
     if not (request_data.get('event_id')):
         response_data = {
             'status': 'error'
@@ -130,6 +136,7 @@ def attend_event(request):
     response_data = {
         'status': 'success',
     }
+
     return Response(data=response_data, status=status.HTTP_200_OK)
 
 
