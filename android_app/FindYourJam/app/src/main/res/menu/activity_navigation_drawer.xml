@@ -3,15 +3,20 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_first_layout"
+            android:id="@+id/nav_Events_attending"
             android:icon="@drawable/events"
-            android:title="Events" />
+            android:title="Events Attending" />
+
         <item
-            android:id="@+id/nav_second_layout"
+            android:id="@+id/nav_Events_Owned"
+            android:icon="@drawable/events"
+            android:title="Events Owned" />
+        <item
+            android:id="@+id/nav_Create_Event"
             android:icon="@drawable/add"
             android:title="Create Event" />
         <item
-            android:id="@+id/nav_third_layout"
+            android:id="@+id/nav_Logout"
             android:icon="@drawable/logout"
             android:title="Logout" />
 

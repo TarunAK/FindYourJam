@@ -76,39 +76,37 @@ public class NavigationActivity extends AppCompatActivity
         int id = item.getItemId();
         FragmentManager fragmentManager = getFragmentManager();
 
-        if (id == R.id.nav_first_layout) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame
-                            , new FirstFragment())
-                    .commit();
-            // Handle the camera action
-        } else if (id == R.id.nav_second_layout) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame
-                            , new SecondFragment())
-                    .commit();
-        } else if (id == R.id.nav_third_layout) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame
-                            , new ThirdFragment())
-                    .commit();
+        if (id == R.id.nav_Events_attending) {
+            EventsAttending();
+
+        } else if (id == R.id.nav_Create_Event) {
+            CreateEvent();
+
+
+        } else if (id == R.id.nav_Logout) {
+            Logout();
+
+
+        } else if (id == R.id.nav_Events_Owned) {
+            EventsOwned();
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-    public static void updateAccount(Context activity, String token){
-        //Write to shared memory
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(activity.getString(R.string.session_id), token);
-        editor.apply();
-    }
 
-    public static String getToken(Context activity){
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
-        return sharedPref.getString(activity.getString(R.string.session_id),"no");
+    }
+    public void EventsAttending(){
+
+    }
+    public void CreateEvent(){
+
+    }
+    public void Logout(){
+
+    }
+    public void EventsOwned(){
+
     }
 }
