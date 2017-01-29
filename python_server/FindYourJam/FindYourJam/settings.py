@@ -25,7 +25,7 @@ SECRET_KEY = 'z0$(*5v%b5x7s8383^3t%6c(%!xjr!&hnch$m+kef&z%58#u92'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [u'findyourjam-dev.us-west-2.elasticbeanstalk.com','localhost']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'authentication.apps.AuthenticationConfig',
+    'events',
 ]
 
 MIDDLEWARE = [

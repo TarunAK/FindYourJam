@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
@@ -19,7 +18,7 @@ def create_user(request):
     """
     response = Response(data={'status': 'error'}, status=status.HTTP_200_OK)
     request_data = json.loads(request.body)
-    print(request_data)
+    #print(request_data)
     if request_data.get('username') and request_data.get('password') and request_data.get('email'):
         if User.objects.filter(username=request_data['username']).exists():
             response.data = {'status': 'error', 'message': 'Username is already taken'}
@@ -86,7 +85,7 @@ def refresh_token(request):
     return Response(data=response_data, status=status.HTTP_200_OK)
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 @authentication_classes((TokenAuthentication,))
 @permission_classes((IsAuthenticated,))
 def delete_token(request):
