@@ -447,10 +447,10 @@ public class CreateEvent extends AppCompatActivity {
         @Override
         protected void onPostExecute(final Boolean b) {
             if (b) {
-                Toast.makeText(getApplicationContext(), "YAY", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Event Created", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
-                Toast.makeText(getApplicationContext(), "NAY", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error, Event Not Created", Toast.LENGTH_SHORT).show();
                 title.setVisibility(View.VISIBLE);
                 time.setVisibility(View.VISIBLE);
                 place.setVisibility(View.VISIBLE);

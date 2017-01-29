@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -128,6 +129,8 @@ public class EventDisplay extends AppCompatActivity {
                 if(output[4].equals("false")){
                     mAttend.setVisibility(View.VISIBLE);
                 }
+                ProgressBar prog = (ProgressBar)findViewById(R.id.spinner);
+                prog.setVisibility(View.GONE);
             }else{
                 Toast.makeText(getApplicationContext(),"Error Loading Event",Toast.LENGTH_SHORT).show();
                 finish();
