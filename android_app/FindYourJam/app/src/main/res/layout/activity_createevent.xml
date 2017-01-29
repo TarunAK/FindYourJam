@@ -9,6 +9,7 @@
 
     <!-- Login progress -->
     <ProgressBar
+        android:paddingTop="30dp"
         android:id="@+id/login_progress"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
