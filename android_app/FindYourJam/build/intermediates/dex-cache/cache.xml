@@ -88,7 +88,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="7f6238c094a6e3b2852ee4ab7185169f27b59a97">
+        sha1="9af20d896af769a61646ee4318b01a6ca7e596e9">
         <dex dex="C:\Users\Sai Vikranth Desu\Documents\GitHub\FindYourJam\android_app\FindYourJam\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_273065cbd34b692f1c31761e2469b06754103b27\classes.dex" />
     </item>
     <item
@@ -178,7 +178,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="9f5a3781294aeade8296a0af8c2379537ba210a2">
+        sha1="ad13ec9566097f13f29aab9686be8318b96ea064">
         <dex dex="C:\Users\Sai Vikranth Desu\Documents\GitHub\FindYourJam\android_app\FindYourJam\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_4cda5e4eba4399f46e2ff6f8289999c4defa0cc2\classes.dex" />
     </item>
 
