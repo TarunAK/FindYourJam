@@ -38,6 +38,7 @@ public class DisplayEventListActivity extends AppCompatActivity {
     private ArrayList<EventObject> mList = new ArrayList<>();
     @Override
     public void onCreate(Bundle savedInstances){
+        setTitle("");
         super.onCreate(savedInstances);
         setContentView(R.layout.activity_event_list);
         setTitle("Hosted Events");

@@ -31,6 +31,8 @@ public class EventDisplay extends AppCompatActivity {
         super.onCreate(savedInstances);
         setContentView(R.layout.activity_event_display);
 
+        setTitle("");
+
         mTitle = (TextView)findViewById(R.id.ev_title);
         mDescription = (TextView)findViewById(R.id.ev_description);
         mDate = (TextView)findViewById(R.id.ev_date);

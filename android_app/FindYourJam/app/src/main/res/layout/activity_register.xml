@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background"
+    android:background="@color/colorPrimary"
     >
 
     <LinearLayout
@@ -20,7 +20,7 @@
             android:layout_marginBottom="20dp"
             android:padding="10dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/bull"/>
+            android:src="@drawable/littlogo"/>
 
         <EditText
             android:id="@+id/username_field"
@@ -28,7 +28,9 @@
             android:layout_height="wrap_content"
             android:hint="@string/username_field"
             android:inputType="textPersonName"
-            android:maxLines="1"/>
+            android:maxLines="1"
+            style="@android:style/Widget.Holo.Light.EditText" />
+
         <EditText
             android:id="@+id/email_field"
             android:layout_width="match_parent"
