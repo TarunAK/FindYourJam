@@ -17,6 +17,10 @@ import android.widget.Toast;
 import com.example.tarunkalikivaya.findyourjam.eventlistattend.DisplayEventListAttendActivity;
 import com.example.tarunkalikivaya.findyourjam.eventlistscreated.DisplayEventListActivity;
 import com.example.tarunkalikivaya.findyourjam.session.LoginActivity;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
 
 import org.json.JSONObject;
 
@@ -27,7 +31,7 @@ import java.net.URL;
 
 
 public class NavigationActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,19 @@ public class NavigationActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Get the map
+        MapFragment mapFragment = (MapFragment) getFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        
+        //map.addMarker(new MarkerOptions()
+         //       .position(new LatLng(0, 0))
+         //       .title("Marker"));
     }
 
     @Override
