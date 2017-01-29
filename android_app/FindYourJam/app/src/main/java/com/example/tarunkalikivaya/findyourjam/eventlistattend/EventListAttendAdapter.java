@@ -1,13 +1,16 @@
 package com.example.tarunkalikivaya.findyourjam.eventlistattend;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.tarunkalikivaya.findyourjam.NavigationActivity;
 import com.example.tarunkalikivaya.findyourjam.R;
+import com.example.tarunkalikivaya.findyourjam.eventlistscreated.DisplayEventListActivity;
 
 import java.util.List;
 

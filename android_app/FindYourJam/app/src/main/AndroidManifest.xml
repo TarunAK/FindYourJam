@@ -34,6 +34,9 @@
             android:name=".eventlistattend.DisplayEventListAttendActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".EventDisplay"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".eventlistscreated.DisplayEventListActivity"
             android:screenOrientation="portrait" />
 

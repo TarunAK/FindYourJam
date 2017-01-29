@@ -1,14 +1,20 @@
 package com.example.tarunkalikivaya.findyourjam.eventlistattend;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tarunkalikivaya.findyourjam.Constants;
+import com.example.tarunkalikivaya.findyourjam.EventDisplay;
+import com.example.tarunkalikivaya.findyourjam.NavigationActivity;
 import com.example.tarunkalikivaya.findyourjam.R;
+import com.example.tarunkalikivaya.findyourjam.eventlistscreated.DisplayEventListActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -42,6 +48,16 @@ public class DisplayEventListAttendActivity extends AppCompatActivity {
         mAdapater = new EventListAttendAdapter(this,mList);
 
         mListView.setAdapter(mAdapater);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                EventAttendObject obj = mList.get(position);
+                Intent intent = new Intent(DisplayEventListAttendActivity.this,EventDisplay.class);
+                intent.putExtra("id",obj.getId());
+                startActivity(intent);
+            }
+        });
         new GetEventsCreated().execute(Constants.getToken(this));
     }
 
