@@ -2,6 +2,8 @@ package com.example.tarunkalikivaya.findyourjam;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,7 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -133,7 +134,8 @@ public class NavigationActivity extends AppCompatActivity
         startActivity(intent);
     }
     public void CreateEvent(){
-
+        Intent intent = new Intent(NavigationActivity.this, CreateEvent.class);
+        startActivity(intent);
     }
     public void Logout(){
         new Logout().execute(Constants.getToken(this));
