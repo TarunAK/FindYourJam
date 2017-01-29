@@ -4,10 +4,10 @@
     <!-- Errors -->
     <string name="network_error">No network connection available</string>
     <!-- Login Screen -->
-    <string name="email_name_field">Display Name:</string>
+    <string name="email_name_field">Username:</string>
     <string name="password_field">Password:</string>
     <string name="login">Login</string>
-    <string name="register"><u>Sign Up For FindYourJam</u></string>
+    <string name="register"><u>Sign Up For LITT</u></string>
     <string name="forgot_password"><u>Forgot your password?</u></string>
     <string name="error_text">Invalid Username/Password Combination</string>
 
@@ -36,4 +36,14 @@
     <string name="close">Close Drawer</string>
     <string name="loading">Loading...</string>
     <string name="transfer">Transfer Amount</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- Main Activity -->
+    <string name="google_android_map_api_key">AIzaSyDUSs-VdV5IEG1YdQFfPU0lGQH7_XD1DQc</string>
+
 </resources>

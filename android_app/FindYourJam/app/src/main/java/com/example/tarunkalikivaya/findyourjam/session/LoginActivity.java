@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.tarunkalikivaya.findyourjam.Constants;
 import com.example.tarunkalikivaya.findyourjam.MainActivity;
+import com.example.tarunkalikivaya.findyourjam.NavigationActivity;
 import com.example.tarunkalikivaya.findyourjam.R;
 
 import org.json.JSONObject;
@@ -190,7 +191,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean bool){
             if(bool){
-                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this,NavigationActivity.class);
                 startActivity(intent);
 
                 //Toast.makeText(getApplicationContext(), "Test ", Toast.LENGTH_SHORT).show();
@@ -261,7 +262,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean bool){
             if(bool){
-                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this,NavigationActivity.class);
                 startActivity(intent);
                 finish();
 
