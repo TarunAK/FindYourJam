@@ -263,9 +263,9 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean bool){
             if(bool){
+                finish();
                 Intent intent = new Intent(LoginActivity.this,NavigationActivity.class);
                 startActivity(intent);
-                finish();
 
                 //Toast.makeText(getApplicationContext(), "Test 1", Toast.LENGTH_SHORT).show();
             }else{

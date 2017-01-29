@@ -64,7 +64,7 @@ public class NavigationActivity extends AppCompatActivity
         setContentView(R.layout.activity_navigation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("");
+        setTitle("LITT");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -109,6 +109,9 @@ public class NavigationActivity extends AppCompatActivity
             mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
                 @Override
                 public boolean onMyLocationButtonClick() {
+                    if(mMap.getMyLocation() == null){
+                        return false;
+                    }
                     mMap.getMyLocation().getLatitude();
                     mMap.getMyLocation().getLongitude();
                     new GetMarkers().execute(Constants.getToken(NavigationActivity.this),String.valueOf(mMap.getMyLocation().getLatitude()),String.valueOf(mMap.getMyLocation().getLongitude()),"1000");

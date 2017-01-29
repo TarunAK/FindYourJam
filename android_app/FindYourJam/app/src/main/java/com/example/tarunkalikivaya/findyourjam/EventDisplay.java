@@ -120,6 +120,7 @@ public class EventDisplay extends AppCompatActivity {
         @Override
         protected void onPostExecute(String[] output){
             if(output!=null){
+                setTitle(output[0]);
                 mTitle.setText(output[0]);
                 mDescription.setText(output[1]);
                 mDate.setText(output[2]);

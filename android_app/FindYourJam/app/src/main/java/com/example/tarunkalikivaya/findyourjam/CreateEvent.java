@@ -63,7 +63,7 @@ public class CreateEvent extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTitle("");
+        setTitle("Create Event");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createevent);
         // Set up the login form.
