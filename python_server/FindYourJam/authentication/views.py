@@ -96,6 +96,6 @@ def delete_token(request):
     token, created = Token.objects.get_or_create(user=user)
     token.delete()
     response_data = {
-        'status': 'Success'
+        'status': 'success'
     }
     return Response(data=response_data, status=status.HTTP_200_OK)
