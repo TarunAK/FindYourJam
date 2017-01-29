@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".CreateEvent">
+        <activity android:name=".CreateEvent" />
 
         <activity android:name=".MainActivity" />
         <activity

@@ -13,13 +13,17 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
 
 /**
  * A login screen that offers login via email/password.
@@ -337,10 +341,10 @@ public class CreateEvent extends AppCompatActivity {
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class EventCreationTask extends AsyncTask<String, Void, double[]> {
+    public class EventCreationTask extends AsyncTask<String, Void, Boolean> {
 
         @Override
-        protected double[] doInBackground(String... str) {
+        protected Boolean doInBackground(String... str) {
             // TODO: attempt authentication against a network service.
             //String address = setAndGetAddress();
 
@@ -353,20 +357,22 @@ public class CreateEvent extends AppCompatActivity {
 
             //String date  = str[5];
             URL url;
-            HttpURLConnection urlConnection = null;
-            double lat;
-            double lng;
-            double[] coordinates = {, };
+            HttpsURLConnection urlConnection = null;
+            double lat = 0;
+            double lng = 0;
             try {
-                url = new URL("https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=AIzaSyDUSs-VdV5IEG1YdQFfPU0lGQH7_XD1DQc");
-                urlConnection = (HttpURLConnection) url.openConnection();
+                url = new URL("https://maps.googleapis.com/maps/api/geocode/json?address=" + location.replace(" ", "+") + "&key=AIzaSyBun-QP3dFfQz59waRq1Lp4YxKM29fvubc");
+                urlConnection = (HttpsURLConnection) url.openConnection();
+                urlConnection.connect();
                 BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                String text = br.readLine();
+                String text = "";
+                String line;
+                while ((line = br.readLine()) != null) {
+                    text += line;
+                }
                 JSONObject response = new JSONObject(text);
                 lat = response.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getDouble("lat");
                 lng = response.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getDouble("lng");
-                coordinates[0] = lat;
-                coordinates[1] = lng;
                 //readStream(in);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -376,33 +382,21 @@ public class CreateEvent extends AppCompatActivity {
             }
             //return coordinates;
             String token = Constants.getToken(getBaseContext());;
-
             String urlEndPoint = Constants.WEB_URL + "/api/v1/events/create_event" ;
-
             String status = "";
-
             JSONObject output = new JSONObject();
 
             try {
-
                 output.put("title",title);
-
                 output.put("description",description);
-
-                output.put("lat",loc_lat);
-
-                output.put("long",loc_long);
-
+                output.put("lat", lat);
+                output.put("long", lng);
                 output.put("location",location);
-
                 output.put("date",date);
 
-            }catch (Exception e){
-
+            } catch (Exception e){
                 e.printStackTrace();
-
                 return false;
-
             }
 
             //Run the api call
@@ -410,86 +404,59 @@ public class CreateEvent extends AppCompatActivity {
             HttpURLConnection client = null;
 
             try {
-
-                URL url = new URL(urlEndPoint);
-
-                client =(HttpURLConnection) url.openConnection();
-
+                URL url1 = new URL(urlEndPoint);
+                client =(HttpURLConnection) url1.openConnection();
                 client.setRequestMethod("POST");
-
                 client.setConnectTimeout(10000);
-
                 client.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-
                 client.setRequestProperty("Authorization", " Token " + token);
-
                 client.setDoOutput(true);
-
                 OutputStream os = client.getOutputStream();
-
                 os.write(output.toString().getBytes("UTF-8"));
-
                 os.flush();
-
                 os.close();
-
-                if(client.getResponseCode()!= 200){
-
+                int response_code = client.getResponseCode();
+                if (response_code != 200){
                     return false;
-
                 }
-
-
 
                 BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()));
-
                 String text = br.readLine();
-
                 JSONObject response= new JSONObject(text);
-
-
-
                 status = response.getString("status");
 
-
-
-            }catch (Exception e){
-
+            } catch (Exception e){
                 e.printStackTrace();
-
                 if(client!=null){
-
                     client.disconnect();
-
                 }
-
                 return false;
-
             }finally {
-
                 if(client!=null){
-
                     client.disconnect();
-
                 }
-
             }
-
-
 
             if(!status.equals("success")){
-
                 return false;
-
             }
-
             return true;
-
         }
 
         @Override
-        protected void onPostExecute(final double[] arr) {
-
+        protected void onPostExecute(final Boolean b) {
+            if (b) {
+                Toast.makeText(getApplicationContext(), "YAY", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(getApplicationContext(), "NAY", Toast.LENGTH_SHORT).show();
+                title.setVisibility(View.VISIBLE);
+                time.setVisibility(View.VISIBLE);
+                place.setVisibility(View.VISIBLE);
+                description.setVisibility(View.VISIBLE);
+                mProgressView.setVisibility(View.GONE);
+                mLoginFormView.setVisibility(View.VISIBLE);
+            }
         }
 
         @Override
